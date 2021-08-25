@@ -35,13 +35,21 @@ public class Users implements Serializable {
     String password;
 
     @NotNull
-    int zipCode;
+    String username;
 
     @NotNull
-    String firstName;
+    String role;
 
-    @NotNull
-    String lastName;
+    Boolean enabled;
+
+//    @NotNull
+//    int zipCode;
+//
+//    @NotNull
+//    String firstName;
+//
+//    @NotNull
+//    String lastName;
 
 
 
