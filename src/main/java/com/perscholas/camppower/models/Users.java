@@ -27,16 +27,11 @@ public class Users implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-//    @Email
-//    @NotNull
-//    String email;
-
-    @NotNull
-    String password;
-
     @NotNull
     String username;
 
+    @NotNull
+    String password;
 
     @Column(columnDefinition = "varchar(255) default 'ROLE_USER'")
     String role = "ROLE_USER";
@@ -44,14 +39,18 @@ public class Users implements Serializable {
     @Column(columnDefinition = "boolean default true")
     Boolean enabled = true;
 
-//    @NotNull
-//    int zipCode;
-//
-//    @NotNull
-//    String firstName;
-//
-//    @NotNull
-//    String lastName;
+    @Email
+    @NotNull
+    String email;
+
+    @NotNull
+    Integer zipCode;
+
+    @NotNull
+    String firstName;
+
+    @NotNull
+    String lastName;
 
 
 
