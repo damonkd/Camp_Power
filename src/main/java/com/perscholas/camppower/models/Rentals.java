@@ -5,10 +5,13 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
+
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.List;
+
+
+
+
 
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -20,40 +23,34 @@ import java.util.List;
 //@RequiredArgsConstructor
 @Slf4j
 
-//@Table(name ="USERS")
-public class Users implements Serializable {
-
+//@Table(name ="RENTALS")
+public class Rentals implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
     @NotNull
-    String username;
+    String type;
 
     @NotNull
-    String password;
-
-    @Column(columnDefinition = "varchar(255) default 'ROLE_USER'")
-    String role = "ROLE_USER";
-
-    @Column(columnDefinition = "boolean default true")
-    Boolean enabled = true;
-
-    @Email
-    @NotNull
-    String email;
+    String make;
 
     @NotNull
-    Integer zipCode;
+    Integer watts;
 
     @NotNull
-    String firstName;
+    Integer locationZip;
 
     @NotNull
-    String lastName;
+    float pricePerNight;
 
-    @OneToMany()
-    List<Rentals> rentList;
+    @ManyToOne()
+    @JoinColumn()
+    Users user;
+
+
+
+
 
 }

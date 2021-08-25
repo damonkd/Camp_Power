@@ -8,7 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Date;
 
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -20,40 +20,24 @@ import java.util.List;
 //@RequiredArgsConstructor
 @Slf4j
 
-//@Table(name ="USERS")
-public class Users implements Serializable {
-
+//@Table(name ="BOOKING")
+public class Booking implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
     @NotNull
-    String username;
+    @Temporal(TemporalType.DATE)
+    Date pickUpDate;
 
     @NotNull
-    String password;
+    @Temporal(TemporalType.DATE)
+    Date returnDate;
 
-    @Column(columnDefinition = "varchar(255) default 'ROLE_USER'")
-    String role = "ROLE_USER";
+    boolean pickedUp = false;
 
-    @Column(columnDefinition = "boolean default true")
-    Boolean enabled = true;
+    boolean returned = false;
 
-    @Email
-    @NotNull
-    String email;
-
-    @NotNull
-    Integer zipCode;
-
-    @NotNull
-    String firstName;
-
-    @NotNull
-    String lastName;
-
-    @OneToMany()
-    List<Rentals> rentList;
-
+    boolean completed = false;
 }
