@@ -20,7 +20,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder(4);
     }
 
     @Bean
@@ -40,9 +40,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .anyRequest().authenticated()
+                .antMatchers("/register/**").permitAll()
+                .antMatchers("/register_success/**").permitAll()
+                .antMatchers("///**").permitAll()
+                .anyRequest().permitAll()
                 .and()
                 .formLogin().permitAll()
+
                 .and()
                 .logout().permitAll();
     }
