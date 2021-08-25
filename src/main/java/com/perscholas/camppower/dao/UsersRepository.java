@@ -1,4 +1,4 @@
-package com.perscholas.camppower.repositories;
+package com.perscholas.camppower.dao;
 
 import com.perscholas.camppower.models.Users;
 import org.springframework.data.jpa.repository.JpaRepository;

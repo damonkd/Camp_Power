@@ -27,9 +27,9 @@ public class Users implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Email
-    @NotNull
-    String email;
+//    @Email
+//    @NotNull
+//    String email;
 
     @NotNull
     String password;
@@ -37,10 +37,12 @@ public class Users implements Serializable {
     @NotNull
     String username;
 
-    @NotNull
-    String role;
 
-    Boolean enabled;
+    @Column(columnDefinition = "varchar(255) default 'ROLE_USER'")
+    String role = "ROLE_USER";
+
+    @Column(columnDefinition = "boolean default true")
+    Boolean enabled = true;
 
 //    @NotNull
 //    int zipCode;
