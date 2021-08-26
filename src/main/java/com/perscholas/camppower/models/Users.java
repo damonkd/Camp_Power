@@ -53,9 +53,13 @@ public class Users implements Serializable {
     @NotNull
     String lastName;
 
-    //@MapsId
-    @OneToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+
+    @OneToMany(mappedBy = "users")
     List<Rentals> rentList;
+
+    @OneToOne(orphanRemoval = true)
+    @JoinColumn(name = "booking_id")
+    private Booking booking;
 
     public void setThisRentList(Rentals rental) {
         this.rentList.add(rental);

@@ -12,7 +12,7 @@
     <div>
         <form th:action="@{/logout}" method="post">
             <p>
-                Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
+                Welcome <b>[[${#request.userPrincipal.principal.username}]]</b>
             </p>
             <input type="submit" value="Sign Out" />
         </form>
@@ -25,15 +25,16 @@
         <table class="table table-striped table-bordered">
             <thead class="thead-dark">
             <tr>
-                <th>User ID</th>
-                <th>E-mail</th>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>Rental Type</th>
+                <th>Manufacturer</th>
+                <th>Watts</th>
+                <th>Cost Per Night</th>
+                <th>Location Zip</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="rental: ${listRentals}">
-                <td th:text="${rental.type}">Rental Type/td>
+                <td th:text="${rental.type}">Rental Type</td>
                 <td th:text="${rental.make}">Manufacturer</td>
                 <td th:text="${rental.watts}">Watts</td>
                 <td th:text="${rental.pricePerNight}">Cost Per Night</td>

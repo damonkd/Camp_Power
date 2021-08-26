@@ -1,8 +1,10 @@
 package com.perscholas.camppower.controllers;
 
+import com.perscholas.camppower.dao.BookingRepository;
 import com.perscholas.camppower.dao.RentalsRepository;
 import com.perscholas.camppower.models.Rentals;
 import com.perscholas.camppower.models.Users;
+import com.perscholas.camppower.models.Booking;
 import com.perscholas.camppower.dao.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -25,6 +27,8 @@ public class HomeController {
     private UsersRepository userRepo;
     @Autowired
     private RentalsRepository rentalRepo;
+    @Autowired
+    private BookingRepository bookingRepo;
 
 
 
@@ -42,6 +46,16 @@ public class HomeController {
 //        model.addAttribute("listProfession", listProfession);
 
         return "registration_form";
+    }
+
+    @GetMapping("/booking")
+    public String bookinForm(Model bookModel) {
+        List<Rentals> listRentals = rentalRepo.findAll();
+        bookModel.addAttribute("listRentals", listRentals);
+
+        Booking booked = new Booking();
+        bookModel.addAttribute("book", booked);
+        return "bookingForm";
     }
 
     @GetMapping("/rental")
@@ -64,6 +78,7 @@ public class HomeController {
 
         return "register_success";
     }
+
     @PostMapping("/process_rental")
     public String processRegister(Rentals rental) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -82,6 +97,25 @@ public class HomeController {
         return "register_success";
         }
 
+    @PostMapping("/processBooking")
+    public String processRegister(Booking booked) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+
+        Users userForBooking = userRepo.getUserByUsername(currentPrincipalName);
+        booked.setUser(userForBooking);
+
+
+
+
+        bookingRepo.save(booked);
+
+
+
+        return "register_success";
+    }
+
 
     @GetMapping("/rentals")
     public String listRentals(Model model) {
@@ -97,6 +131,22 @@ public class HomeController {
         model.addAttribute("listRentals", listRentals);
 
         return "rentalsShow";
+    }
+
+    @GetMapping("/rentalsAll")
+    public String listAllRentals(Model model) {
+
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String currentPrincipalName = authentication.getName();
+//
+//        Users userByUsername = userRepo.getUserByUsername(currentPrincipalName);
+//        long currentId = userByUsername.getId();
+
+
+        List<Rentals> listRentals = rentalRepo.findAll();
+        model.addAttribute("listRentals", listRentals);
+
+        return "bookingForm";
     }
 
 

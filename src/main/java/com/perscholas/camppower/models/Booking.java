@@ -28,16 +28,22 @@ public class Booking implements Serializable {
     Long id;
 
     @NotNull
-    @Temporal(TemporalType.DATE)
-    Date pickUpDate;
+    String pickUpDate;
 
     @NotNull
-    @Temporal(TemporalType.DATE)
-    Date returnDate;
+    String returnDate;
 
     boolean pickedUp = false;
 
     boolean returned = false;
 
     boolean completed = false;
+
+    @OneToOne()
+    @JoinColumn(name = "rental_id", referencedColumnName = "id")
+    Rentals rental;
+
+    @OneToOne()
+    @JoinColumn(name = "userRenter_id", referencedColumnName = "id")
+    Users user;
 }
