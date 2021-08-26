@@ -133,6 +133,26 @@ public class HomeController {
         return "register_success";
     }
 
+    @PostMapping("/processRentalDelete")
+    public String processRentalDelete(long id) {
+
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String currentPrincipalName = authentication.getName();
+//
+//        Users userForBooking = userRepo.getUserByUsername(currentPrincipalName);
+//        booked.setUser(userForBooking);
+
+
+
+
+        //bookingRepo.save(booked);
+        rentalRepo.deleteById(id);
+
+
+
+        return "register_success";
+    }
+
 
     @GetMapping("/rentals")
     public String listRentals(Model model) {
@@ -148,6 +168,25 @@ public class HomeController {
         model.addAttribute("listRentals", listRentals);
 
         return "rentalsShow";
+    }
+
+
+    @GetMapping("/rentaldelete")
+    public String deletRentals(Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+
+        Users userByUsername = userRepo.getUserByUsername(currentPrincipalName);
+        long currentId = userByUsername.getId();
+
+        Rentals rental = new Rentals();
+        model.addAttribute("rental", rental);
+
+        List<Rentals> listRentals = rentalRepo.findAllByUsers_Id(currentId);
+        model.addAttribute("listRentals", listRentals);
+
+        return "deleteRental";
     }
 
     @GetMapping("/rentalsAll")

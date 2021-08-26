@@ -43,6 +43,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/register/**").permitAll()
                 .antMatchers("/register_success/**").permitAll()
                 .antMatchers("///**").permitAll()
+                .antMatchers("/booking/**").authenticated()
+                .antMatchers("/showBooking/**").authenticated()
+                .antMatchers("/rental/**").authenticated()
+                .antMatchers("/process_rental/**").authenticated()
+                .antMatchers("/processBooking/**").authenticated()
+                .antMatchers("/rentals/**").authenticated()
+                .antMatchers("/rentalsAll/**").authenticated()
+
+
+
+
+
                 .anyRequest().permitAll()
                 .and()
                 .formLogin().permitAll()
