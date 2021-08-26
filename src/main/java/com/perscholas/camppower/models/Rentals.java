@@ -45,12 +45,13 @@ public class Rentals implements Serializable {
     @NotNull
     float pricePerNight;
 
-    @ManyToOne()
-    @JoinColumn()
-    Users user;
 
 
 
 
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "users_id")
+    private Users users;
 
 }

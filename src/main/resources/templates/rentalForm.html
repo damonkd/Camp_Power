@@ -9,6 +9,11 @@
 </head>
 <body>
 <div class="container text-center">
+    <p>
+        <h1>Welcome <b>[[${#request.userPrincipal.principal.username}]]</b></h1>
+
+    </p>
+
     <div>
         <h1>List an Item for rent</h1>
     </div>
@@ -59,7 +64,7 @@
 
 
             <div>
-                <button type="submit" class="btn btn-primary">Sign Up</button>
+                <button type="submit" class="btn btn-primary">Post Rental</button>
             </div>
         </div>
     </form>

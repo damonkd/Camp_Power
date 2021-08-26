@@ -22,6 +22,8 @@ public class MyUserDetails implements UserDetails {
         return Arrays.asList(authority);
     }
 
+
+
     @Override
     public String getPassword() {
         return user.getPassword();

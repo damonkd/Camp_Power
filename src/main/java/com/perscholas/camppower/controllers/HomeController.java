@@ -5,20 +5,27 @@ import com.perscholas.camppower.models.Rentals;
 import com.perscholas.camppower.models.Users;
 import com.perscholas.camppower.dao.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-
+import java.security.Principal;
+import java.util.List;
 
 
 @Controller
 public class HomeController {
+
+
     @Autowired
     private UsersRepository userRepo;
     @Autowired
     private RentalsRepository rentalRepo;
+
 
 
     @GetMapping("/")
@@ -39,6 +46,8 @@ public class HomeController {
 
     @GetMapping("/rental")
     public String showRentForm(Model rentModel) {
+
+
         Rentals rent = new Rentals();
         rentModel.addAttribute("rental", rent);
         return "rentalForm";
@@ -57,15 +66,38 @@ public class HomeController {
     }
     @PostMapping("/process_rental")
     public String processRegister(Rentals rental) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
 
-        System.out.println("this is rental" + rental);
+        Users userByUsername = userRepo.getUserByUsername(currentPrincipalName);
+        long currentId = userByUsername.getId();
+        rental.setUsers(userByUsername);
+        //System.out.println("the username -->> " + currentPrincipalName + " " + currentId );
+        userByUsername.setThisRentList(rental);
+
         rentalRepo.save(rental);
+        userRepo.save(userByUsername);
 
 
         return "register_success";
+        }
 
 
-}
+    @GetMapping("/rentals")
+    public String listRentals(Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+
+        Users userByUsername = userRepo.getUserByUsername(currentPrincipalName);
+        long currentId = userByUsername.getId();
+
+
+        List<Rentals> listRentals = rentalRepo.findAllByUsers_Id(currentId);
+        model.addAttribute("listRentals", listRentals;
+
+        return "rentalsShow";
+    }
 
 
 }

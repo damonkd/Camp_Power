@@ -53,7 +53,11 @@ public class Users implements Serializable {
     @NotNull
     String lastName;
 
-    @OneToMany()
+    //@MapsId
+    @OneToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     List<Rentals> rentList;
 
+    public void setThisRentList(Rentals rental) {
+        this.rentList.add(rental);
+    }
 }
