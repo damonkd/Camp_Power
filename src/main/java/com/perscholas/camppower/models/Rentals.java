@@ -8,9 +8,7 @@ import javax.persistence.*;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-
-
-
+import java.util.List;
 
 
 @Entity
@@ -52,5 +50,9 @@ public class Rentals implements Serializable {
     @ManyToOne
     @JoinColumn(name = "users_id")
     private Users users;
+
+    @OneToMany(mappedBy = "rentals", orphanRemoval = true)
+    List<images> images;
+
 
 }

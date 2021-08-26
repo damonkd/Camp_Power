@@ -58,6 +58,23 @@ public class HomeController {
         return "bookingForm";
     }
 
+    @GetMapping("/showBooking")
+    public String showBooking(Model bookModel) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+
+        Users userByUsername = userRepo.getUserByUsername(currentPrincipalName);
+        long currentId = userByUsername.getId();
+
+
+        List<Booking> listBookings = bookingRepo.findAllByUser_Id(currentId);
+        bookModel.addAttribute("listBookings", listBookings);
+
+
+        return "bookingShow";
+    }
+
     @GetMapping("/rental")
     public String showRentForm(Model rentModel) {
 

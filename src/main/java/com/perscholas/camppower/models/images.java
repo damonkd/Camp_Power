@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.List;
 
 
 @Entity
@@ -30,4 +31,15 @@ public class images implements Serializable {
     String imageName;
 
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "rentals_id")
+    private Rentals rentals;
+
+    public Rentals getRentals() {
+        return rentals;
+    }
+
+    public void setRentals(Rentals rentals) {
+        this.rentals = rentals;
+    }
 }

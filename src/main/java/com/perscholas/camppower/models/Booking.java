@@ -43,7 +43,7 @@ public class Booking implements Serializable {
     @JoinColumn(name = "rental_id", referencedColumnName = "id")
     Rentals rental;
 
-    @OneToOne()
+    @ManyToOne()
     @JoinColumn(name = "userRenter_id", referencedColumnName = "id")
     Users user;
 }

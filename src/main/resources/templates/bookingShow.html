@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>List Users</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container text-center">
+    <div>
+        <form th:action="@{/logout}" method="post">
+            <p>
+                Welcome <b>[[${#request.userPrincipal.principal.username}]]</b>
+            </p>
+            <input type="submit" value="Sign Out" />
+        </form>
+    </div>
+    <div>
+        <h1>List of your bookings</h1>
+    </div>
+
+    <div>
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+            <tr>
+                <th>Booking Id</th>
+                <th>Pick Up Date</th>
+                <th>Return Date</th>
+                <th>Owner</th>
+                <th>Type</th>
+                <th>Make</th>
+                <th>Watts</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="Booking: ${listBookings}">
+                <td th:text="${Booking.id}">Booking Id</td>
+                <td th:text="${Booking.PickUpDate}">Pick up Date</td>
+                <td th:text="${Booking.returnDate}">Booking Id</td>
+                <td th:text="${Booking.user.username}">Booking Id</td>
+                <td th:text="${Booking.rental.type}">Booking Id</td>
+                <td th:text="${Booking.rental.make}">Booking Id</td>
+                <td th:text="${Booking.rental.watts}">Booking Id</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

@@ -57,9 +57,9 @@ public class Users implements Serializable {
     @OneToMany(mappedBy = "users")
     List<Rentals> rentList;
 
-    @OneToOne(orphanRemoval = true)
+    @OneToMany(orphanRemoval = true)
     @JoinColumn(name = "booking_id")
-    private Booking booking;
+    List<Booking> booking;
 
     public void setThisRentList(Rentals rental) {
         this.rentList.add(rental);
