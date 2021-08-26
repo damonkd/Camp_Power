@@ -94,7 +94,7 @@ public class HomeController {
 
 
         List<Rentals> listRentals = rentalRepo.findAllByUsers_Id(currentId);
-        model.addAttribute("listRentals", listRentals;
+        model.addAttribute("listRentals", listRentals);
 
         return "rentalsShow";
     }

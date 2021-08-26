@@ -18,7 +18,7 @@
         </form>
     </div>
     <div>
-        <h1>List of items for Rent</h1>
+        <h1>List of your items for Rent</h1>
     </div>
 
     <div>
@@ -33,10 +33,11 @@
             </thead>
             <tbody>
             <tr th:each="rental: ${listRentals}">
-                <td th:text="${rental.type}">User ID</td>
-                <td th:text="${user.email}">E-mail</td>
-                <td th:text="${user.firstName}">First Name</td>
-                <td th:text="${user.lastName}">Last Name</td>
+                <td th:text="${rental.type}">Rental Type/td>
+                <td th:text="${rental.make}">Manufacturer</td>
+                <td th:text="${rental.watts}">Watts</td>
+                <td th:text="${rental.pricePerNight}">Cost Per Night</td>
+                <td th:text="${rental.locationZip}">Location Zip</td>
             </tr>
             </tbody>
         </table>
